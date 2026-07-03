@@ -14,14 +14,13 @@ export function ScrollProgress() {
 
     updateProgress();
     window.addEventListener('scroll', updateProgress, { passive: true });
-
     return () => window.removeEventListener('scroll', updateProgress);
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-0 z-50 h-1 bg-transparent">
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-50 h-[2px] bg-transparent">
       <div
-        className="h-full bg-brand transition-all duration-200"
+        className="h-full bg-gradient-to-r from-brand via-accent-violet to-brand transition-[width] duration-150 ease-out"
         style={{ width: `${progress}%` }}
       />
     </div>

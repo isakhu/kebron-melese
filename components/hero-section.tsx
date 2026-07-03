@@ -1,109 +1,159 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Briefcase, Mail, Linkedin } from 'lucide-react';
-import { Button } from './ui/button';
+import { Briefcase, Mail, Linkedin, ArrowRight, Download } from 'lucide-react';
 import { profile } from '../data/profile';
 
 export function HeroSection() {
   return (
-    <section id="top" className="relative overflow-hidden bg-surface-darker dark:bg-surface-darker py-20 md:py-32">
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-0 w-96 h-96 bg-brand/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-accent-purple/5 rounded-full blur-3xl" />
+    <section
+      id="top"
+      className="relative overflow-hidden bg-surface-darker py-24 md:py-36"
+    >
+      {/* Background orbs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="orb absolute -top-40 right-0 h-[600px] w-[600px] bg-brand/20" />
+        <div className="orb absolute bottom-0 left-0 h-[500px] w-[500px] bg-accent-violet/15" />
+        <div className="orb absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[800px] w-[800px] bg-brand/5" />
+        {/* Grid overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(0,217,255,1) 1px, transparent 1px), linear-gradient(to right, rgba(0,217,255,1) 1px, transparent 1px)',
+            backgroundSize: '80px 80px',
+          }}
+        />
       </div>
-      <div className="section-container relative grid gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+
+      <div className="section-container relative grid gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+        {/* Left — text content */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="max-w-2xl"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand">Banking Operations Specialist</p>
-          <h1 className="mt-6 text-5xl font-bold tracking-tight text-text-primary sm:text-6xl lg:text-7xl leading-tight">
-            Kebron Kebede Olana
+          {/* Status badge */}
+          <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-brand/20 bg-brand/8 px-4 py-1.5">
+            <span className="h-2 w-2 rounded-full bg-brand animate-pulse" />
+            <span className="text-xs font-semibold uppercase tracking-widest text-brand">
+              Open to Opportunities
+            </span>
+          </div>
+
+          {/* Hero name */}
+          <h1 className="font-display text-hero font-bold leading-[1.05] tracking-[-0.03em]">
+            <span className="gradient-text-subtle">Kebron</span>{' '}
+            <span className="gradient-text-subtle">Kebede</span>
+            <br />
+            <span className="gradient-text">Olana</span>
           </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-text-secondary">
-            Project Manager candidate with proven expertise in banking operations, business analysis, and operational documentation. Currently leading payment systems and process improvement initiatives at Cooperative Bank of Oromia.
+
+          {/* Role */}
+          <p className="mt-5 text-xl font-semibold text-text-secondary md:text-2xl">
+            Banking Operations Specialist{' '}
+            <span className="text-text-muted font-normal">&amp; Project Manager Candidate</span>
           </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+
+          {/* Description */}
+          <p className="mt-6 max-w-xl text-base leading-[1.8] text-text-secondary">
+            Proven expertise in card banking operations, business analysis, and payment systems at Cooperative Bank of Oromia. Driving process improvement and stakeholder collaboration to deliver measurable results.
+          </p>
+
+          {/* CTA buttons */}
+          <div className="mt-10 flex flex-wrap gap-4">
             <a
               href="/Kebron-CV.pdf"
               download
-              className="inline-flex items-center justify-center rounded-lg bg-brand px-8 py-3.5 text-sm font-semibold text-surface-darker hover:bg-brand-light transition duration-300 hover:shadow-glow group"
+              className="group inline-flex items-center gap-2.5 rounded-xl bg-brand px-7 py-3.5 text-sm font-bold text-surface-darker shadow-glow hover:bg-brand-light hover:shadow-glow-lg transition-all duration-300"
             >
+              <Download className="h-4 w-4" />
               Download CV
-              <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center rounded-lg border border-brand/30 px-8 py-3.5 text-sm font-semibold text-brand hover:border-brand hover:bg-brand/5 transition duration-300"
+              className="group inline-flex items-center gap-2.5 rounded-xl border border-brand/25 bg-brand/5 px-7 py-3.5 text-sm font-bold text-brand hover:border-brand/60 hover:bg-brand/10 hover:shadow-glow-sm transition-all duration-300"
             >
-              Get in touch
+              Get in Touch
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
+
+          {/* Info cards row */}
           <div className="mt-12 grid gap-4 sm:grid-cols-2">
-            <div className="group rounded-xl border border-white/10 bg-white/5 backdrop-blur-glass p-6 hover:border-brand/50 hover:bg-brand/5 transition duration-300">
-              <div className="flex items-center gap-3 text-brand">
-                <Briefcase className="h-5 w-5" />
-                <span className="text-xs font-semibold uppercase tracking-wide text-text-muted">Current Role</span>
+            <div className="glass-card glass-card-hover rounded-2xl p-5">
+              <div className="mb-3 flex items-center gap-2.5">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10">
+                  <Briefcase className="h-4 w-4 text-brand" />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-widest text-text-muted">Current Role</span>
               </div>
-              <p className="mt-4 text-lg font-semibold text-text-primary">Card Banking Officer</p>
+              <p className="text-base font-bold text-text-primary">Card Banking Officer</p>
               <p className="mt-1 text-sm text-text-secondary">Cooperative Bank of Oromia</p>
             </div>
-            <div className="group rounded-xl border border-white/10 bg-white/5 backdrop-blur-glass p-6 hover:border-brand/50 hover:bg-brand/5 transition duration-300">
-              <div className="flex items-center gap-3 text-brand">
-                <Mail className="h-5 w-5" />
-                <span className="text-xs font-semibold uppercase tracking-wide text-text-muted">Contact</span>
+            <div className="glass-card glass-card-hover rounded-2xl p-5">
+              <div className="mb-3 flex items-center gap-2.5">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand/10">
+                  <Mail className="h-4 w-4 text-brand" />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-widest text-text-muted">Contact</span>
               </div>
-              <div className="mt-4 space-y-1 text-sm">
-                <p className="text-text-primary font-medium">{profile.email}</p>
-                <p className="text-text-secondary">{profile.phone}</p>
-              </div>
+              <p className="text-sm font-bold text-text-primary">{profile.email}</p>
+              <p className="mt-1 text-sm text-text-secondary">{profile.phone}</p>
             </div>
           </div>
         </motion.div>
+
+        {/* Right — profile card */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="relative mx-auto w-full max-w-md"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+          className="relative mx-auto w-full max-w-sm"
         >
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-glass shadow-card hover:shadow-glow transition duration-500 group">
-            <div className="absolute inset-0 bg-gradient-to-br from-brand/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
+          {/* Glow ring behind card */}
+          <div className="absolute inset-0 rounded-3xl bg-brand-gradient opacity-10 blur-2xl scale-95" />
+
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/8 to-white/[0.02] backdrop-blur-glass shadow-card hover:shadow-glow transition-all duration-500 group">
+            {/* Top gradient overlay */}
+            <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-brand/15 to-transparent" />
+            {/* Hover overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-brand/8 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
             <div className="relative">
-              <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-brand/20 to-transparent" />
               <Image
                 src="/kebron-profile.jpg"
                 alt="Professional headshot of Kebron Kebede Olana"
                 width={520}
                 height={520}
-                className="relative mx-auto h-auto w-full p-8"
+                className="h-auto w-full px-8 pt-8 pb-4"
                 priority
               />
             </div>
-            <div className="border-t border-white/10 p-6">
-              <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Professional Summary</p>
-              <p className="mt-4 text-sm leading-relaxed text-text-secondary">
+
+            <div className="relative border-t border-white/8 p-6">
+              <p className="text-xs font-bold uppercase tracking-widest text-text-muted">Professional Summary</p>
+              <p className="mt-3 text-sm leading-relaxed text-text-secondary">
                 Executive portfolio highlighting banking operations, business analysis, system enhancement, and stakeholder leadership.
               </p>
-              <div className="mt-6 flex items-center gap-3 group/link">
-                <Linkedin className="h-5 w-5 text-brand group-hover/link:text-brand-light transition" />
-                <a
-                  href={profile.linkedIn}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-sm font-semibold text-brand group-hover/link:text-brand-light transition"
-                >
-                  Visit LinkedIn profile
-                </a>
-              </div>
+              <a
+                href={profile.linkedIn}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-5 flex items-center gap-2.5 text-sm font-bold text-brand hover:text-brand-light transition-colors duration-200 group/link"
+              >
+                <Linkedin className="h-4 w-4" />
+                <span className="group-hover/link:underline">LinkedIn Profile</span>
+                <ArrowRight className="h-3.5 w-3.5 group-hover/link:translate-x-1 transition-transform" />
+              </a>
             </div>
           </div>
         </motion.div>
       </div>
+
+      {/* Bottom fade */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface-darker to-transparent" />
     </section>
   );
 }

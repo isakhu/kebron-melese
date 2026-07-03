@@ -1,93 +1,122 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { ChevronRight, Clock, Tag } from 'lucide-react';
 import { SectionTitle } from './ui/section-title';
 import { projects } from '../data/projects';
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 },
+  }),
+};
+
 export function ProjectsSection() {
   return (
-    <section id="projects" className="section-container py-32">
-      <SectionTitle
-        title="Projects"
-        subtitle="Case study overview of banking initiatives, requirement documentation, and process optimization."
-      />
-      <div className="space-y-8">
-        {projects.map((project, idx) => (
-          <motion.article
-            key={project.title}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.6, ease: 'easeOut', delay: idx * 0.05 }}
-            className="grid gap-8 rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-glass p-8 hover:border-brand/30 transition duration-300 lg:grid-cols-[0.85fr_0.95fr]"
-          >
-            <div className="space-y-5">
-              <span className="inline-flex items-center rounded-lg bg-brand/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand">
-                {project.category}
-              </span>
-              <h3 className="text-2xl font-bold text-text-primary">{project.title}</h3>
-              <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Timeline</p>
-              <p className="text-base font-semibold text-text-secondary">{project.timeline}</p>
-            </div>
-            <div className="space-y-5">
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-lg bg-white/5 border border-white/10 p-4 hover:border-brand/30 transition">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Overview</p>
-                  <p className="mt-2 text-sm leading-relaxed text-text-secondary">{project.overview}</p>
+    <section id="projects" className="py-28">
+      <div className="section-container">
+        <SectionTitle
+          title="Projects"
+          accent="Portfolio"
+          subtitle="Banking initiatives, requirement documentation, and process optimization case studies."
+        />
+
+        <div className="space-y-8">
+          {projects.map((project, idx) => (
+            <motion.article
+              key={project.title}
+              custom={idx}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              className="glass-card glass-card-hover group overflow-hidden rounded-2xl p-8"
+            >
+              {/* Project header */}
+              <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="inline-flex items-center gap-1.5 rounded-lg border border-brand/20 bg-brand/8 px-3 py-1 text-xs font-bold uppercase tracking-widest text-brand">
+                      <Tag className="h-3 w-3" />
+                      {project.category}
+                    </span>
+                  </div>
+                  <h3 className="font-display text-2xl font-bold text-text-primary group-hover:text-brand transition-colors duration-300">
+                    {project.title}
+                  </h3>
                 </div>
-                <div className="rounded-lg bg-white/5 border border-white/10 p-4 hover:border-brand/30 transition">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Business challenge</p>
-                  <p className="mt-2 text-sm leading-relaxed text-text-secondary">{project.challenge}</p>
-                </div>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-lg bg-white/5 border border-white/10 p-4 hover:border-brand/30 transition">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Solution</p>
-                  <p className="mt-2 text-sm leading-relaxed text-text-secondary">{project.solution}</p>
-                </div>
-                <div className="rounded-lg bg-white/5 border border-white/10 p-4 hover:border-brand/30 transition">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Business value</p>
-                  <p className="mt-2 text-sm leading-relaxed text-text-secondary">{project.value}</p>
+                <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/4 px-4 py-2 whitespace-nowrap">
+                  <Clock className="h-3.5 w-3.5 text-text-muted" />
+                  <span className="text-sm font-semibold text-text-secondary">{project.timeline}</span>
                 </div>
               </div>
-              <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Responsibilities</p>
-                <ul className="mt-3 space-y-2 text-sm">
+
+              {/* 2-col detail grid */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-xl border border-white/8 bg-white/[0.03] p-5 hover:border-brand/20 transition-colors duration-200">
+                  <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-text-muted">Overview</p>
+                  <p className="text-sm leading-relaxed text-text-secondary">{project.overview}</p>
+                </div>
+                <div className="rounded-xl border border-white/8 bg-white/[0.03] p-5 hover:border-brand/20 transition-colors duration-200">
+                  <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-text-muted">Business Challenge</p>
+                  <p className="text-sm leading-relaxed text-text-secondary">{project.challenge}</p>
+                </div>
+                <div className="rounded-xl border border-white/8 bg-white/[0.03] p-5 hover:border-brand/20 transition-colors duration-200">
+                  <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-text-muted">Solution</p>
+                  <p className="text-sm leading-relaxed text-text-secondary">{project.solution}</p>
+                </div>
+                <div className="rounded-xl border border-white/8 bg-white/[0.03] p-5 hover:border-brand/20 transition-colors duration-200">
+                  <p className="mb-2.5 text-xs font-bold uppercase tracking-widest text-text-muted">Business Value</p>
+                  <p className="text-sm leading-relaxed text-text-secondary">{project.value}</p>
+                </div>
+              </div>
+
+              {/* Responsibilities */}
+              <div className="mt-5 rounded-xl border border-white/8 bg-white/[0.03] p-5">
+                <p className="mb-3 text-xs font-bold uppercase tracking-widest text-text-muted">My Responsibilities</p>
+                <ul className="grid gap-2 sm:grid-cols-2">
                   {project.responsibilities.map((item) => (
-                    <li key={item} className="flex gap-2 text-text-secondary">
-                      <span className="text-brand">→</span>
-                      <span>{item}</span>
+                    <li key={item} className="flex gap-2.5">
+                      <ChevronRight className="mt-0.5 h-4 w-4 text-brand flex-shrink-0" />
+                      <span className="text-sm text-text-secondary">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-lg bg-white/5 border border-white/10 p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Tools used</p>
-                  <p className="mt-2 text-sm text-text-secondary">{project.tools.join(', ')}</p>
+
+              {/* Tools + Lessons */}
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-xl border border-white/8 bg-white/[0.03] p-5">
+                  <p className="mb-3 text-xs font-bold uppercase tracking-widest text-text-muted">Tools Used</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tools.map((tool) => (
+                      <span
+                        key={tool}
+                        className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-text-secondary"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="rounded-lg bg-white/5 border border-white/10 p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Lessons learned</p>
-                  <ul className="mt-2 space-y-1 text-sm">
+                <div className="rounded-xl border border-white/8 bg-white/[0.03] p-5">
+                  <p className="mb-3 text-xs font-bold uppercase tracking-widest text-text-muted">Lessons Learned</p>
+                  <ul className="space-y-1.5">
                     {project.lessons.map((lesson) => (
-                      <li key={lesson} className="text-text-secondary">• {lesson}</li>
+                      <li key={lesson} className="flex gap-2 text-sm text-text-secondary">
+                        <span className="text-brand mt-0.5 flex-shrink-0">·</span>
+                        {lesson}
+                      </li>
                     ))}
                   </ul>
                 </div>
               </div>
-              <div className="relative overflow-hidden rounded-lg border border-white/10 bg-white/5 p-3">
-                <Image
-                  src="/project-placeholder.svg"
-                  alt={project.imageAlt}
-                  width={760}
-                  height={340}
-                  className="h-auto w-full rounded-md"
-                />
-              </div>
-            </div>
-          </motion.article>
-        ))}
+            </motion.article>
+          ))}
+        </div>
       </div>
     </section>
   );
