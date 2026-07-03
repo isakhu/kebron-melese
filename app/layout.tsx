@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className="bg-slate-50 text-slate-900 antialiased">
+      <body className="bg-surface-darker text-text-primary antialiased">
         <ScrollProgress />
         <Navigation />
         {children}
