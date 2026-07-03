@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-family: Inter, system-ui, sans-serif;
+  background-color: #ffffff;
+  color: #0b2d5b;
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: #ffffff;
+  color: #0b2d5b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(200, 161, 77, 0.18);
+}
+
+.section-container {
+  width: min(1110px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.hero-shadow {
+  background: rgba(11, 45, 91, 0.04);
+  backdrop-filter: blur(12px);
+}
+
+.card-surface {
+  background: #ffffff;
+  border: 1px solid rgba(11, 45, 91, 0.08);
+  box-shadow: 0 18px 55px rgba(11, 45, 91, 0.06);
+}
+
+.focus-ring {
+  outline: 2px solid rgba(200, 161, 77, 0.4);
+  outline-offset: 2px;
+}
